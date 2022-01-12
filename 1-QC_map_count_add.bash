@@ -19,7 +19,7 @@
 # Or, if you want to submit to LSF:
 # ssh connection to hpcws001.mpipz.mpg.de (via Putty in case of Windows)
 # type "lsfenv" and enter to active LSF submission system
-# bsub -J QC_map_count -q multicore40 -n 40 -R "rusage[mem=24000] span[hosts=1]" -M 64000 ./1-QC_map_count_add.bash ./0-config_add.bash
+# bsub -J QC_map_count -q multicore40 -n 40 -R "rusage[mem=6400] span[hosts=1]" -M 12800 ./1-QC_map_count_add.bash ./0-config_add.bash
 # -J: job name
 # -q: queues (multicore40, multicore20, ioheavy, normal, ...)
 # -n: number of cores
