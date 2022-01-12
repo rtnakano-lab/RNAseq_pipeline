@@ -161,7 +161,7 @@ cat ${count_dir}/count_table_lousy.txt | \
 	sed "s/${map_dir//\//\\/}\///g" | \
 	sed "s/_hisat2.sam//g" | \
 	tail -n +2 | \
-	cut -f 1,7-$(expr ${#lib_list[@]} + 6) \
+	cut -f 1,7-$(expr ${#sam_list[@]} + 6) \
 	> ${count_dir}/count_table.txt
 
 rm ${count_dir}/count_table_lousy.txt
