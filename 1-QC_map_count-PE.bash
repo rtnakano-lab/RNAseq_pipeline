@@ -44,19 +44,19 @@ clean_seq_dir=${out_dir}/clean_seq
 map_dir="${out_dir}/map"
 count_dir="${out_dir}/featureCounts"
 
-# rm -r -f ${report_dir}
-# rm -r -f ${clean_seq_dir}
-# rm -r -f ${map_dir}
-# rm -r -f ${count_dir}
-# rm -r -f ${logfile}
-# rm -r -f ${output_file}
+rm -r -f ${report_dir}
+rm -r -f ${clean_seq_dir}
+rm -r -f ${map_dir}
+rm -r -f ${count_dir}
+rm -r -f ${logfile}
+rm -r -f ${output_file}
 
 mkdir -p ${report_dir}
 mkdir -p ${clean_seq_dir}
 mkdir -p ${map_dir}
 mkdir -p ${count_dir}
 
-# prepare lists of libraries and of fastq.gz files (normally one file per library but not always)
+# prepare lists of libraries
 lib_list=($(tail -n +2 ${design_path} | cut -f 1))
 
 # start
@@ -73,12 +73,12 @@ do
 	log "FASTP for ${lib}"
 
 	${FASTP_PATH}/fastp -w 16 -p -q 30 -x \
-		-i ${dat_dir}/${lib}_1.fq.gz \
-		-I ${dat_dir}/${lib}_2.fq.gz \
+		-i ${dat_dir}/${lib}_1.fastq.gz \
+		-I ${dat_dir}/${lib}_2.fastq.gz \
 		-h ${report_dir}/${lib}.html \
 		-j ${report_dir}/${lib}.json \
-		-o ${clean_seq_dir}/${lib}_1.fq.gz \
-		-O ${clean_seq_dir}/${lib}_2.fq.gz \
+		-o ${clean_seq_dir}/${lib}_1.fastq.gz \
+		-O ${clean_seq_dir}/${lib}_2.fastq.gz \
 		&>> ${output_file}
 
 		# -w: number of threads
@@ -108,8 +108,8 @@ do
 
 	# mapping by HiSAT2
 	hisat2 --threads 40 \
-		-1 ${clean_seq_dir}/${lib}_1.fq.gz \
-		-2 ${clean_seq_dir}/${lib}_2.fq.gz \
+		-1 ${clean_seq_dir}/${lib}_1.fastq.gz \
+		-2 ${clean_seq_dir}/${lib}_2.fastq.gz \
 		-x ${HISAT2_INDEXES} \
 		-S ${map_dir}/${lib}_hisat2.sam \
 		-t \
