@@ -12,15 +12,15 @@ Algorithms:
 
 The example scripts use th Arabidopsis thaliana genome annotation (araport11), guided by splicing sites and exon positions, which can be easily modified and adapted to your own reference sequences/annotations.
 
-##### [1-QC_map_count.bash](1-1-QC_map_count.bash)  
+##### [1-QC_map_count.bash](1-QC_map_count.bash)  
 For single-end read data.  
 It should come along with 0-config.bash
 
-##### [1-QC_map_count-PE.bash](1-1-QC_map_count-PE.bash)  
+##### [1-QC_map_count-PE.bash](1-QC_map_count-PE.bash)  
 For paired-end read data.  
 It should come along with 0-config.bash
 
-##### [1-QC_map_count_add.bash](1-1-QC_map_count_add.bash)  
+##### [1-QC_map_count_add.bash](1-QC_map_count_add.bash)  
 For additing additional samples into already-processed samples.
 Optimized for single-end read data.  
 It should come along with 0-config_add.bash
