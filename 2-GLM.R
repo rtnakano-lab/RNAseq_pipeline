@@ -114,34 +114,38 @@ write.table(DE, file=paste(stat, "significance_table.txt", sep=""), sep="\t", qu
 
 
 
+
+
 # up-regulated genes, for metascape
 DEG_list <- sapply(DE.list, function(x) rownames(x)[x == 1])
 
 max_N <- max(sapply(DEG_list, length))
-metascape <- lapply(contrasts_design$names, function(x){
+metascape <- lapply(contrasts$names, function(x){
 	target <- as.character(DEG_list[[x]])
 	out <- rep(NA, max_N)
 	out[1:length(target)] <- target
 	return(out)
 }) %>% do.call(cbind, .)
-colnames(metascape) <- contrasts_design$names
+colnames(metascape) <- contrasts$names
 write.table(metascape, file=paste(stat, "UpDEGs_for_metascape.csv", sep=""), sep=",", quote=F, col.names=T, row.names=F, na="")
-
-
-
 
 # up-regulated genes, for metascape
 DEG_list <- sapply(DE.list, function(x) rownames(x)[x == -1])
 
 max_N <- max(sapply(DEG_list, length))
-metascape <- lapply(contrasts_design$names, function(x){
+metascape <- lapply(contrasts$names, function(x){
 	target <- as.character(DEG_list[[x]])
 	out <- rep(NA, max_N)
 	out[1:length(target)] <- target
 	return(out)
 }) %>% do.call(cbind, .)
-colnames(metascape) <- contrasts_design$names
+colnames(metascape) <- contrasts$names
 write.table(metascape, file=paste(stat, "DownDEGs_for_metascape.csv", sep=""), sep=",", quote=F, col.names=T, row.names=F, na="")
+
+# a smiple list of DEGs
+DEG_list <- sapply(DE.list, function(x) rownames(x)[x != 0]) %>% unlist %>% unique
+write.table(DEG_list, file=paste(stat, "list_of_DEGs.txt", sep=""), sep="\n", quote=F, col.names=F, row.names=F, na="")
+
 
 
 
