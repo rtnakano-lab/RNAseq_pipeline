@@ -1,6 +1,5 @@
 #!/netscratch/dep_psl/grp_psl/ThomasN/tools/bin/bin/Rscripts
-# upset plot
-# Ryohei Thomas Nakano; nakano@mpipz.mpg.de; 04 Apri 2022
+# Ryohei Thomas Nakano; nakano@mpipz.mpg.de
 
 options(warn=-1)
 
