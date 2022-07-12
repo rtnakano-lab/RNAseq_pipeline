@@ -1,6 +1,5 @@
 #!/netscratch/dep_psl/grp_psl/ThomasN/tools/bin/bin/Rscripts
-# R script to run a GLM analysis; for Defeng Shen (AG Andersen, MPIPZ)
-# 12 Nov 2021
+# R script to run a GLM analysis
 # Ryohei Thomas Nakano; nakano@mpipz.mpg.de
 
 options(warn=-1)
