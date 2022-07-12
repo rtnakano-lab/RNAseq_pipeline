@@ -59,7 +59,7 @@ mkdir -p ${count_dir}
 
 # prepare lists of libraries and of fastq.gz files (normally one file per library but not always)
 lib_list=($(tail -n +2 ${design_path} | cut -f 1))
-file_list=($(cd ${dat_dir} && ls *.fq.gz))
+file_list=($(cd ${dat_dir} && ls *.fastq.gz))
 
 # start
 log "Start the entire pipeline"
@@ -76,8 +76,8 @@ do
 
 	${FASTP_PATH}/fastp -w 16 -p -q 30 -x \
 		-i ${dat_dir}/${file} \
-		-h ${report_dir}/${file/.fq.gz/.html} \
-		-j ${report_dir}/${file/.fq.gz/.json} \
+		-h ${report_dir}/${file/.fastq.gz/.html} \
+		-j ${report_dir}/${file/.fastq.gz/.json} \
 		-o ${clean_seq_dir}/${file} \
 		&>> ${output_file}
 
