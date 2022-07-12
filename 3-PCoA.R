@@ -1,6 +1,4 @@
 #!/netscratch/dep_psl/grp_psl/ThomasN/tools/bin/bin/Rscripts
-# R script to plot all RNAseq data on my hands
-# 29 Dec 2020
 # Ryohei Thomas Nakano; nakano@mpipz.mpg.de
 
 options(warn=-1)
