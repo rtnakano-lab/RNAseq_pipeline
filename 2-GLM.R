@@ -34,7 +34,7 @@ write.table(dat,    file=paste(processed_data, "count_table.txt", sep=""), col.n
 
 # ========= paramters ========= #
 
-source(paste(scripts, "GLM_parameters.R", sep=""))
+source(paste(scripts, "2-GLM_parameters.R", sep=""))
 
 # ============================= #
 
