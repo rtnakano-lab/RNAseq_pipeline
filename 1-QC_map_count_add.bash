@@ -62,15 +62,15 @@ count_dir="${out_dir}/featureCounts"
 
 # prepare lists of libraries and of fastq.gz files (normally one file per library but not always)
 lib_list=($(tail -n +2 ${design_path} | cut -f 1))
-file_list=($(cd ${dat_dir} && ls *.fastq.gz))
 
 # start
 log "Start the entire pipeline"
 
-# log "FASTP..."
 
 
-# do what's in the loop for each file
+log "FASTP..."
+file_list=($(cd ${dat_dir} && ls *.fastq.gz))
+
 for file in ${file_list[@]}
 do	
 	log "FASTP for ${file}"
@@ -80,7 +80,7 @@ do
 		-h ${report_dir}/${file/.fastq.gz/.html} \
 		-j ${report_dir}/${file/.fastq.gz/.json} \
 		-o ${clean_seq_dir}/${file} \
-		&>> ${output_file}
+		>> ${output_file} 2>&1
 
 		# -w: number of threads
 		# -p: overrepresenting analysis
@@ -97,25 +97,25 @@ done
 
 
 log "HiSat2 mapping..."
+clean_seq_list=($(ls ${clean_seq_dir}/*.fastq.gz))
 
-# do what's in the loop for each library
 for lib in ${lib_list[@]}
 do
 	log "HiSat2 for ${lib}"
 
 	# collect read files for each library and connect with "," in between
-	R1=$(echo ${file_list[@]} | tr ' ' '\n' | grep -e ${lib} | grep -v ${lib}[0-9] | tr '\n' ',' | sed s/,$//g)
+	R1=$(echo ${clean_seq_list[@]} | tr ' ' '\n' | grep -e ${lib} | grep -v ${lib}[0-9] | tr '\n' ',' | sed s/,$//g)
 
 	# mapping by HiSAT2
 	hisat2 --threads 40 \
-		-U ${clean_seq_dir}/${R1} \
+		-U ${R1} \
 		-x ${HISAT2_INDEXES} \
 		-S ${map_dir}/${lib}_hisat2.sam \
 		-t \
 		--new-summary \
 		--summary-file ${map_dir}/${lib}_align_summary.txt \
 		--met-file ${map_dir}/${lib}_metrics.txt \
-		&>> ${output_file}
+		>> ${output_file} 2>&1
 
 		# --threads: number of threads
 		# -U: read file
@@ -133,9 +133,7 @@ done
 
 
 
-# do what's in the loop for each library
 log "featureCounts..."
-
 sam_list=($(awk -v path=${map_dir} 'NR>1{print path"/"$1"_hisat2.sam"}' ${design_all_path}))
 
 ${FEATURECOUNTS_PATH}/featureCounts -T 40 \
@@ -145,7 +143,7 @@ ${FEATURECOUNTS_PATH}/featureCounts -T 40 \
 	-a ${anno_dir} \
 	-o ${count_dir}/count_table_lousy.txt \
 	${sam_list[@]} \
-	&>> ${output_file}
+	>> ${output_file} 2>&1
 
 	# -T: number of threads
 	# -s: strandedness
