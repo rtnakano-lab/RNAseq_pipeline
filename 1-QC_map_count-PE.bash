@@ -141,6 +141,7 @@ log "featureCounts..."
 sam_list=($(awk -v path=${map_dir} 'NR>1{print path"/"$1"_hisat2.sam"}' ${design_path}))
 
 ${FEATURECOUNTS_PATH}/featureCounts -T 40 \
+	-O -M --fraction \
 	-p -B -C \
 	-t exon \
 	-s 0 \
