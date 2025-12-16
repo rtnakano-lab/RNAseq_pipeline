@@ -1,7 +1,7 @@
 #!/bin/bash
 # config file for RNAseq_pipeline/1-QC_map_count.bash
 # Originally by Ryohei Thomas Nakano, nakano@mpipz.mpg.de
-# Last modified: 22 Sep 2021
+# Last modified: 16 Dec 2025, by Ryohei Thomas Nakano, rtnakano@sci.hokudai.ac.jp
 
 # === Edit for each dataset === #
 # path to raw fastq.gz data
