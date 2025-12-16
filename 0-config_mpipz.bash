@@ -1,0 +1,32 @@
+#!/bin/bash
+# config file for RNAseq_pipeline/1-QC_map_count.bash
+# Originally by Ryohei Thomas Nakano, nakano@mpipz.mpg.de
+# Last modified: 22 Sep 2021
+
+# === Edit for each dataset === #
+# path to raw fastq.gz data
+export dat_dir="/data/seq_rawdata/JN00026247/rawdata"
+
+# path to the design file (a tab-deliminated file with a single-line header row, whose first column contains the list of library names)
+export design_path="/data/mrodriguezyagi/20251216MRodRNASeq1/original_data/design.txt"
+
+# path to output directory where all intermediate and final data will be stored
+# NOTE: The main script will overwrite everything in this directory.
+export out_dir="/data/mrodriguezyagi/20251216MRodRNASeq1/temp"
+
+
+# === Normally you need to edit the followings only once === #
+# path to softwares
+export FASTP_PATH="/shared_tools"
+export FEATURECOUNTS_PATH="/shared_tools/subread-2.0.6-source/bin"
+export HISAT2_PATH="/shared_tools/hisat2-2.2.1"
+
+# path to directory you store the HiSAT2 index that you created
+export HISAT2_INDEXES="/data/common/plant_genomes/Athaliana/araport11_hisat2"
+
+# path to the directory you store the GTF file you used to create the above HiSAT2 index
+export anno_dir="/data/common/plant_genomes/Athaliana/araport11_hisat2/Araport11_GFF3_genes_transposons.201606.gtf"
+
+
+
+
